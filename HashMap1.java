@@ -1,10 +1,15 @@
 package HashMap;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 public class HashMap1 {
+	public static HashMap<String, String> diccionario = new HashMap<String, String>();
 
 	public static void main(String[] args) {
 
@@ -15,13 +20,13 @@ public class HashMap1 {
 			System.err.println("1>Castellano 2>English");
 			lang = menu.nextInt();
 		}
-		HashMap<String, String> diccionario = new HashMap<String, String>();
+
 		if (lang == 1) {
-			cargaDiccionarioEspIng(diccionario);
+			diccionario = cargaDiccionarioEspIng(diccionario);
 		} else if (lang == 2) {
-			cargaDiccionarioIngEsp(diccionario);
+			diccionario = cargaDiccionarioIngEsp(diccionario);
 		}
-			
+
 		Scanner sn = new Scanner(System.in);
 		boolean salir = false;
 		int opcion; // Guardaremos la opcion del usuario
@@ -36,40 +41,22 @@ public class HashMap1 {
 				opcion = sn.nextInt();
 				switch (opcion) {
 				case 1:
-					if (lang == 1) {
-						introEsp();
-					} else if (lang == 2) {
-						introEng();
-					}
+
 					Scanner traduce = new Scanner(System.in);
 					String palabra = traduce.nextLine();
 					if (!diccionario.containsKey(palabra)) {
-						if (lang == 1) {
-							errorEspanol();
-							break;
-						} else if (lang == 2) {
-							errorEnglish();
-							break;
-						}
+						System.out.println("ERROR");
+						break;
 					}
 					System.out.println(diccionario.get(palabra));
 					break;
 				case 2:
-					if (lang == 1) {
-						introEsp();
-					} else if (lang == 2) {
-						introEng();
-					}
+
 					Scanner add = new Scanner(System.in);
 					String palabra1 = add.nextLine();
 					if (diccionario.containsKey(palabra1)) {
-						if (lang == 1) {
-							errorEspanol2();
-							break;
-						} else if (lang == 2) {
-							errorEnglish2();
-							break;
-						}
+						System.out.println("ERROR");
+						break;
 					}
 					if (lang == 1) {
 						introTradEsp();
@@ -80,6 +67,7 @@ public class HashMap1 {
 					diccionario.put(palabra1, palabra2);
 					break;
 				case 3:
+
 					if (lang == 1) {
 						introEsp();
 					} else if (lang == 2) {
@@ -107,8 +95,7 @@ public class HashMap1 {
 					}
 				case 4:
 					for (String key : diccionario.keySet()) {
-						System.out.println(key + " = " + diccionario.get(key));// keySet() se utiliza para recoger todas
-																				// las claves y crear un conjunto
+						System.out.println(key + " = " + diccionario.get(key));// keySet() se utiliza para recoger todas																				// las claves y crear un conjunto
 					}
 					Scanner eliminar = new Scanner(System.in);
 					if (lang == 1) {
@@ -129,6 +116,7 @@ public class HashMap1 {
 					diccionario.remove(seleccion);
 					break;
 				case 5:
+
 					if (lang == 1) {
 						introEsp();
 					} else if (lang == 2) {
@@ -141,6 +129,20 @@ public class HashMap1 {
 							System.out.println(key + " = " + diccionario.get(key));
 						}
 					}
+					break;
+				case 6:
+					int contador = 0;
+					if (lang == 1) {
+						pruebaESP();
+					} else if (lang == 2) {
+						pruebaING();
+					}
+					contador = contador + traducePrueba();
+					contador = contador + traducePrueba();
+					contador = contador + traducePrueba();
+					contador = contador + traducePrueba();
+					contador = contador + traducePrueba();
+					System.out.println("TEST: " + contador + "/5");
 					break;
 				case 0:
 					salir = true;
@@ -165,7 +167,7 @@ public class HashMap1 {
 
 	}
 
-	public static void cargaDiccionarioEspIng(HashMap<String, String> diccionario) {
+	public static HashMap<String, String> cargaDiccionarioEspIng(HashMap<String, String> diccionario) {
 		diccionario.put("Hola", "Hello");
 		diccionario.put("Coche", "Car");
 		diccionario.put("Ordenador", "Computer");
@@ -186,10 +188,10 @@ public class HashMap1 {
 		diccionario.put("Camara web", "Webcam");
 		diccionario.put("Ordenador portatil", "Laptop");
 		diccionario.put("Consola", "Console");
-
+		return diccionario;
 	}
 
-	public static void cargaDiccionarioIngEsp(HashMap<String, String> diccionario) {
+	public static HashMap<String, String> cargaDiccionarioIngEsp(HashMap<String, String> diccionario) {
 		diccionario.put("Hello", "Hola");
 		diccionario.put("Car", "Coche");
 		diccionario.put("Computer", "Ordenador");
@@ -210,7 +212,7 @@ public class HashMap1 {
 		diccionario.put("Webcam", "Camara web");
 		diccionario.put("Laptop", "Ordenador portatil");
 		diccionario.put("Console", "Consola");
-
+		return diccionario;
 	}
 
 	public static void menuEspanol() {
@@ -262,18 +264,53 @@ public class HashMap1 {
 	public static void errorEnglish2() {
 		System.err.println("Word exists in database");
 	}
+
 	public static void errorMenuEsp() {
 		System.err.println("Introduce numero del 1 al 5");
 	}
+
 	public static void errorMenuEng() {
 		System.err.println("Insert number 1 to 5");
 	}
+
 	public static void errorExcEsp() {
 		System.err.println("SOLO NUMEROS");
 	}
+
 	public static void errorExcEng() {
 		System.err.println("ONLY NUMBERS");
 	}
+
+	public static void pruebaESP() {
+		System.out.println("Traduce: ");
+	}
+
+	public static void pruebaING() {
+		System.out.println("Translate: ");
+	}
+
+	public static int traducePrueba() {
+		Set<String> keySet = diccionario.keySet();
+		ArrayList<String> listaKeys = new ArrayList<String>(keySet);
+		Collection<String> values = diccionario.values();
+		ArrayList<String> listaValues = new ArrayList<String>(values);
+		Scanner traduce1 = new Scanner(System.in);
+
+		Random aleatorio = new Random();
+		int id = aleatorio.nextInt(listaKeys.size());
+		System.out.println(listaKeys.get(id));
+		String palabra_1 = traduce1.nextLine();
+
+		if (palabra_1.equals(listaValues.get(id))) {
+			System.out.println("OK");
+			listaKeys.remove(id);
+			listaValues.remove(id);
+			return 1;
+		} else {
+			System.out.println("ERROR");
+			listaKeys.remove(id);
+			listaValues.remove(id);
+			return 0;
+		}
+	}
 }
-//Crea un mini-diccionario español-inglés que contenga, al menos, 20 palabras (con su correspondiente traducción).
-//Utiliza un objeto de la clase HashMap para almacenar las parejas de palabras. El programa pedirá una palabra en español y dará la correspondiente traducción en inglés.
