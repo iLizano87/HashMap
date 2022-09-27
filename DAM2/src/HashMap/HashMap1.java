@@ -221,6 +221,7 @@ public class HashMap1 {
 		System.out.println("3 - Modificar palabra");
 		System.out.println("4 - Eliminar palabra");
 		System.out.println("5 - Buscar palabra");
+		System.out.println("6 - Examen");
 		System.out.println("0 - SALIR");
 	}
 
@@ -230,6 +231,7 @@ public class HashMap1 {
 		System.out.println("3 - Modify word");
 		System.out.println("4 - Remove word");
 		System.out.println("5 - Search word");
+		System.out.println("6 - Exam");
 		System.out.println("0 - EXIT");
 	}
 
