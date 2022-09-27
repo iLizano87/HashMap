@@ -33,42 +33,30 @@ public class HashMap2 {
 
 			switch (eleccion) {
 			case 1:
-				int contador = 0;
-				Scanner id = new Scanner(System.in);
+				int contador1 = 0;
+				Scanner id1 = new Scanner(System.in);
 				System.out.println("1 - " + lang.get("Id"));
 				System.out.println(lang.get("InsName"));
-				String user = id.nextLine();
-				if (comprobarUser(user)) {
+				String user1 = id1.nextLine();
+				if (comprobarUser(user1)) {
 					System.out.println(lang.get("User") + " OK");
 					System.out.println(lang.get("Pass"));
-					String pass = id.nextLine();
-					if (comprobarPass(user, pass)) {
-						System.out.println(lang.get("Entr"));
-						break;
-					} else {
-						contador = contador + 1;
+					String pass = id1.nextLine();
+					contador1++;
+					while (!comprobarPass(user1, pass) && contador1 < 3) {
+						contador1++;
 						System.out.println(lang.get("Pass"));
-						String pass2 = id.nextLine();
-						if (comprobarPass(user, pass2)) {
-							System.out.println(lang.get("Entr"));
-							break;
-						} else {
-							contador = contador + 1;
-							System.out.println(lang.get("Pass"));
-							String pass3 = id.nextLine();
-							if (comprobarPass(user, pass3)) {
-								System.out.println(lang.get("Entr"));
-								break;
-							} else {
-								contador = contador + 1;
-								System.out.println(contador + " " + lang.get("Att"));
-								System.out.println(lang.get("Err"));
-							}
-						}
+						pass = id1.nextLine();
+					}
+					if (contador1 == 3 && !comprobarPass(user1, pass)) {
+						System.out.println("3 " + lang.get("Att"));
+						System.out.println(lang.get("Err"));
 						break;
 					}
+					System.out.println(lang.get("Entr"));
+					break;
 				} else {
-					System.out.println(lang.get("NF"));
+					System.out.println(lang.get("Err"));
 					break;
 				}
 			case 2:
@@ -80,33 +68,6 @@ public class HashMap2 {
 				String pass1 = intro1.nextLine();
 				usuarios.put(nombre1, pass1);
 				break;
-			case 3:
-				int contador1 = 0;
-				Scanner id1 = new Scanner(System.in);
-				System.out.println("1 - " + lang.get("Id"));
-				System.out.println(lang.get("InsName"));
-				String user1 = id1.nextLine();
-				if (comprobarUser(user1)) {
-					System.out.println(lang.get("User") + " OK");
-					System.out.println(lang.get("Pass"));
-					String pass = id1.nextLine();
-					while (!comprobarPass(user1, pass)) {
-						contador1 = contador1 + 1;
-						System.out.println(lang.get("Pass"));
-						pass = id1.nextLine();
-						if (contador1 == 2) {
-							System.out.println("3 " + lang.get("Att"));
-							System.out.println(lang.get("Err"));
-							break;
-						}						
-					}
-					System.out.println(lang.get("Entr"));
-					break;
-				}			
-				else {
-					System.out.println(lang.get("Err"));
-					break;
-				}
 			case 0:
 				System.out.println(lang.get("Exit"));
 				salir = true;
